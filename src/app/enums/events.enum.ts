@@ -1,0 +1,8 @@
+export enum Events {
+    SHIP_CREATED,
+    SHIP_UPDATED,
+    SHIP_TRANSFERED,
+
+    CUSTOMER_CHANGED,
+    CUSTOMER_CREATED,
+}
