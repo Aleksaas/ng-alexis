@@ -7,12 +7,6 @@ import { Events } from '@app/enums/events.enum';
 @Injectable()
 export class ShipService extends BaseService {
 
-    sideNavigationShips: ShipDto[];
-
-    get shipsCount() {
-        return this.sideNavigationShips !== undefined ? this.sideNavigationShips.length : 0;
-    }
-
     constructor(injector: Injector) {
 
         super(injector);
@@ -22,14 +16,29 @@ export class ShipService extends BaseService {
         this.subscribe();
     }
 
-    // Read operations
+    sideNavigationShips: ShipDto[];
 
-    async loadSideNavigationShips() {
-        const response = await this.search();
-        this.sideNavigationShips = response.data.result;
+    get shipsCount() {
+        return this.sideNavigationShips !== undefined ? this.sideNavigationShips.length : 0;
     }
 
-    // Subscribe to events
+    /************************* Ship selection *************************/
+
+    _selectedShip: ShipDto;
+
+    setSelected(shipId: number) {
+        this._selectedShip = this.sideNavigationShips.filter(s => s.id == shipId)[0];
+    }
+
+    get selectedShip() {
+        if (this.sideNavigationShips == undefined) {
+            return undefined;
+        }
+
+        return this._selectedShip != undefined ? this._selectedShip : this.sideNavigationShips[0];
+    }
+
+    /************************* Subscribe to events *************************/
 
     subscribe() {
         this.eventService.subscribe(Events.CUSTOMER_CHANGED, () => {
@@ -37,7 +46,12 @@ export class ShipService extends BaseService {
         });
     }
 
-    // CUD operations
+    /************************* API calls *************************/
+
+    async loadSideNavigationShips() {
+        const response = await this.search();
+        this.sideNavigationShips = response.data.result;
+    }
 
     async createShip(ship: ShipDto) {
 

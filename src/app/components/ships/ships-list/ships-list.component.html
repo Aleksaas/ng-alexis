@@ -5,6 +5,9 @@
 </ul>
 
 <div>
-    Neka druga komponenta:
-    Ship count: {{shipService.shipsCount}}
+    Neka druga komponenta: Ship count: {{shipService.shipsCount}}
+</div>
+
+<div *ngIf="shipService.selectedShip">
+    Neka treca komponenta: Selected ship: {{shipService.selectedShip.name}}
 </div>
