@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let ship of shipService.sideNavigationShips">
+        {{ship.name}}
+    </li>
+</ul>
+
+<div>
+    Neka druga komponenta:
+    Ship count: {{shipService.shipsCount}}
+</div>

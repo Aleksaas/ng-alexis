@@ -7,19 +7,26 @@ import { Events } from '@app/enums/events.enum';
 @Injectable()
 export class ShipService extends BaseService {
 
-    sideNavigationShips$: Observable<ShipDto[]>;
+    sideNavigationShips: ShipDto[];
+
+    get shipsCount() {
+        return this.sideNavigationShips !== undefined ? this.sideNavigationShips.length : 0;
+    }
 
     constructor(injector: Injector) {
 
         super(injector);
+
+        this.route = 'ships';
 
         this.subscribe();
     }
 
     // Read operations
 
-    loadSideNavigationShips() {
-        this.sideNavigationShips$ = this.search();
+    async loadSideNavigationShips() {
+        const response = await this.search();
+        this.sideNavigationShips = response.data.result;
     }
 
     // Subscribe to events
@@ -32,18 +39,16 @@ export class ShipService extends BaseService {
 
     // CUD operations
 
-    createShip(ship: ShipDto) {
+    async createShip(ship: ShipDto) {
 
-        this.create(ship).subscribe(response => {
-            this.loadSideNavigationShips();
-            this.eventService.sendEvent(Events.SHIP_CREATED);
-        });
+        await this.create(ship);
+        this.loadSideNavigationShips();
     }
 
-    updateShip(id: number, ship: ShipDto) {
+    async updateShip(id: number, ship: ShipDto) {
 
-        this.update(id, ship).subscribe(response => {
-            this.loadSideNavigationShips();
-        });
+        await this.update(id, ship);
+        this.loadSideNavigationShips();
+        this.eventService.sendEvent(Events.SHIP_UPDATED);
     }
 }

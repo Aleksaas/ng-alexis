@@ -1,19 +1,39 @@
+import { EventService } from '@app/services/event.service';
+import { ShipService } from '@app/services/ship.service';
+import { BaseService } from './services/base.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { ApiService } from '@app/services/api.service';
+import { ShipModule } from '@app/components/ships/ships.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+const routes: Routes = [
+
+];
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        CommonModule,
+        RouterModule.forRoot(routes),
+        ShipModule,
     ],
     providers: [
-        ApiService
+        ApiService,
+        BaseService,
+        ShipService,
+        EventService
     ],
+    exports: [RouterModule],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { ApiResponse } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 
@@ -35,7 +35,8 @@ export class ApiService {
             'X-Requested-With': 'XMLHttpRequest',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
-            'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
+            'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT',
+            'Accept-Language': 'en'
         });
 
         this.options = {
@@ -62,48 +63,48 @@ export class ApiService {
         }, 100);
     }
 
-    public get(path: string, params?: any): Observable<any> {
+    async get(path: string, params?: any): Promise<any> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
             .get<ApiResponse>(`${API_URL}/${path}`, this.options)
-            .pipe(map((res) => { this.requestNum--; return res.data; }), catchError(err => this.handleError(err))
-        );
+            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+        ).toPromise();
     }
 
-    public post(path: string, data: any, params?: any): Observable<any> {
+    async post(path: string, data: any, params?: any): Promise<any> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
             .post<ApiResponse>(`${API_URL}/${path}`, data, this.options)
-            .pipe(map((res) => { this.requestNum--; return res.data; }), catchError(err => this.handleError(err))
-        );
+            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+        ).toPromise();
     }
 
-    public put(path: string, data: any, params?: any): Observable<any> {
+    async put(path: string, data: any, params?: any): Promise<any> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
             .put<ApiResponse>(`${API_URL}/${path}`, data, this.options)
-            .pipe(map((res) => { this.requestNum--; return res.data; }), catchError(err => this.handleError(err))
-        );
+            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+        ).toPromise();
     }
 
-    public delete(path: string, params?: any): Observable<any> {
+    async delete(path: string, params?: any): Promise<any> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
             .delete<ApiResponse>(`${API_URL}/${path}`, this.options)
-            .pipe(map((res) => { this.requestNum--; return res.data; }), catchError(err => this.handleError(err))
-        );
+            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+        ).toPromise();
     }
 
     private handleError(error: any) {
@@ -124,6 +125,6 @@ export class ApiService {
                 break;
         }
 
-        return Observable.throw(error);
+        return throwError(error);
     }
 }

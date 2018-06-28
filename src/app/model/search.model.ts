@@ -1,38 +1,27 @@
-export class SearchSort {
-    orders: Order[];
-}
-
 export class Order {
     orderBy: string;
     sortDirection: string;
 }
 
-export class PageSelection {
-    pageNumber: number;
-    pageSize: number;
-}
-
 export class PageableSearchRequest {
 
     locale: string;
-    pageSelection: PageSelection;
+    pageNumber: number;
+    pageSize: number;
     query: any;
-    order: Order;
-    searchSort: SearchSort;
+    orders: Order[];
 
     constructor() {
 
-        this.pageSelection = new PageSelection();
-        this.pageSelection.pageNumber = 1;
-        this.pageSelection.pageSize = 10;
+        this.pageNumber = 1;
+        this.pageSize = 10;
 
         this.query = {};
 
-        this.order = new Order();
+        const order = new Order();
 
-        this.searchSort = new SearchSort();
-        this.searchSort.orders = [];
-        this.searchSort.orders.push(this.order);
+        this.orders = [];
+        this.orders.push(order);
 
     }
 }
