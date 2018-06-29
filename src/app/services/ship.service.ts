@@ -3,6 +3,7 @@ import { Injectable, OnInit, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ShipDto } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
+import { SearchResult } from '@app/model/common.model';
 
 @Injectable()
 export class ShipService extends BaseService {
@@ -49,19 +50,18 @@ export class ShipService extends BaseService {
     /************************* API calls *************************/
 
     async loadSideNavigationShips() {
-        const response = await this.search();
-        this.sideNavigationShips = response.data.result;
+        this.sideNavigationShips = (await this.search<SearchResult>()).data.result;
     }
 
     async createShip(ship: ShipDto) {
 
-        await this.create(ship);
+        await this.create<ShipDto>(ship);
         this.loadSideNavigationShips();
     }
 
     async updateShip(id: number, ship: ShipDto) {
 
-        await this.update(id, ship);
+        await this.update<ShipDto>(id, ship);
         this.loadSideNavigationShips();
         this.eventService.sendEvent(Events.SHIP_UPDATED);
     }
