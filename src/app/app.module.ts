@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '@app/components/shared/shared.module';
 
 const routes: Routes = [
 
@@ -20,10 +21,7 @@ const routes: Routes = [
         AppComponent
     ],
     imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        CommonModule,
+        SharedModule,
         RouterModule.forRoot(routes),
         ShipModule,
     ],
