@@ -1,0 +1,26 @@
+<ul class="my-fleet-sidebar">
+    <li>
+        <a routerLink="/my-fleet">
+            <i class="fa fa-tachometer-alt"></i> My Fleet
+        </a>
+        <ul>
+            <li>
+                <a routerLink="ships" routerLinkActive="active" (click)="shipService.clearSelected()">All Ships <i class="carret fa fa-chevron-right"></i></a>
+            </li>
+            <li *ngFor="let ship of shipService.sideNavigationShips; let i = index">
+                <a routerLink="ship/{{ship.id}}"  routerLinkActive="active" 
+                    (click)="shipService.setSelected(ship.id)">{{ship.name}} 
+                    <i class="carret fa fa-chevron-right" [class.fa-chevron-down]="shipService.isSelected(ship.id)" [class.fa-chevron-right]="!shipService.isSelected(ship.id)"></i></a>
+                <ul class="sub-menu" [class.open]="shipService.isSelected(ship.id)">
+                    <li><a routerLink="ship/{{ship.id}}/details" routerLinkActive="active">Details</a></li>
+                    <li><a routerLink="ship/{{ship.id}}/equipment" routerLinkActive="active">Equipment</a></li>
+                    <li><a routerLink="ship/{{ship.id}}/tasks" routerLinkActive="active">Tasks</a></li>
+                    <li><a routerLink="ship/{{ship.id}}/reports" routerLinkActive="active">Service Reports</a></li>
+                    <li><a routerLink="ship/{{ship.id}}/documents" routerLinkActive="active">Technical Documentation</a></li>
+                    <li><a routerLink="ship/{{ship.id}}/bulletins" routerLinkActive="active">Related Bulletins</a></li>
+                </ul>
+              </li>
+        </ul>
+    </li>
+  </ul>
+  

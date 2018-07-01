@@ -1,6 +1,5 @@
 import { BaseService } from './base.service';
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ShipDto, ShipCmd } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
 import { SearchResult } from '@app/model/common.model';
@@ -17,13 +16,13 @@ export class ShipService extends BaseService {
         this.subscribe();
     }
 
+    /************************* Sidebar navigation and ship selection *************************/
+
     sideNavigationShips: ShipDto[];
 
     get shipsCount() {
         return this.sideNavigationShips !== undefined ? this.sideNavigationShips.length : 0;
     }
-
-    /************************* Ship selection *************************/
 
     private _selectedShip: ShipDto;
 
@@ -39,29 +38,24 @@ export class ShipService extends BaseService {
         return this._selectedShip != undefined ? this._selectedShip : this.sideNavigationShips[0];
     }
 
-    /************************* Ship form *************************/
-
-    currentShip: ShipDto;
-
-
-
-    /************************* Subscribe to events *************************/
-
-    subscribe() {
-        this.eventService.subscribe(Events.CUSTOMER_CHANGED, () => {
-            this.loadSideNavigationShips();
-        });
+    isSelected(shipId: number) {
+        return this.selectedShip.id == shipId;
     }
 
-    /************************* API calls *************************/
+    clearSelected() {
+        this._selectedShip = undefined;
+    }
 
     async loadSideNavigationShips() {
         this.sideNavigationShips = (await this.search<SearchResult>()).data.result;
     }
 
-    async loadShip() {
-        const response = await this.search();
-        this.currentShip = response.data.result;
+    /************************* Ship form *************************/
+
+    currentShip: ShipDto;
+
+    async loadShip(shipId: number) {
+        this.currentShip = (await this.get<ShipDto>(shipId)).data;
     }
 
     async createShip(ship: ShipDto) {
@@ -73,12 +67,20 @@ export class ShipService extends BaseService {
     async updateShip(id: number, ship: ShipDto) {
 
         await this.update<ShipDto>(id, ship);
-        this.eventService.sendEvent(Events.SHIP_UPDATED);
+        this.loadShip(id);
     }
 
     async changeShipStatus(id: number, cmd: ShipCmd) {
 
         await this.put("ships/status", cmd);
-        this.loadSideNavigationShips();
+        this.loadShip(id);
+    }
+
+    /************************* Subscribe to events *************************/
+
+    subscribe() {
+        this.eventService.subscribe(Events.CUSTOMER_CHANGED, () => {
+            this.loadSideNavigationShips();
+        });
     }
 }
