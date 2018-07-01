@@ -3,3 +3,9 @@ export class ShipDto {
     name: string;
     imd: string;
 }
+
+export class ShipCmd {
+    id: number;
+    name: string;
+    imd: string;
+}
