@@ -6,15 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '@app/components/shared/shared.module';
 
 
 
 @NgModule({
     imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        CommonModule,
+        SharedModule,
         ShipsRoutingModule
     ],
     exports: [

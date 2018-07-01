@@ -63,46 +63,46 @@ export class ApiService {
         }, 100);
     }
 
-    async get(path: string, params?: any): Promise<any> {
+    async get<T>(path: string, params?: any): Promise<ApiResponse<T>> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .get<ApiResponse>(`${API_URL}/${path}`, this.options)
+            .get<ApiResponse<T>>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async post(path: string, data: any, params?: any): Promise<any> {
+    async post<T>(path: string, data: any, params?: any): Promise<ApiResponse<T>> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .post<ApiResponse>(`${API_URL}/${path}`, data, this.options)
+            .post<ApiResponse<T>>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async put(path: string, data: any, params?: any): Promise<any> {
+    async put<T>(path: string, data: any, params?: any): Promise<ApiResponse<T>> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .put<ApiResponse>(`${API_URL}/${path}`, data, this.options)
+            .put<ApiResponse<T>>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async delete(path: string, params?: any): Promise<any> {
+    async delete<T>(path: string, params?: any): Promise<ApiResponse<T>> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .delete<ApiResponse>(`${API_URL}/${path}`, this.options)
+            .delete<ApiResponse<T>>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }

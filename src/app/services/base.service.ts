@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Injector, Injectable } from '@angular/core';
 import { PageableSearchRequest } from '@app/model/search.model';
 import { EventService } from '@app/services/event.service';
+import { ApiResponse } from '@app/model/common.model';
 
 /**
  * This is base service for all API calls. No API call should be done outside this service.
@@ -21,7 +22,7 @@ export class BaseService extends ApiService {
         this.eventService = injector.get(EventService);
     }
 
-    search(searchRequest?: PageableSearchRequest): Promise<any> {
+    search<T>(searchRequest?: PageableSearchRequest): Promise<ApiResponse<T>> {
 
         if (!searchRequest) {
             searchRequest = new PageableSearchRequest();
@@ -30,19 +31,19 @@ export class BaseService extends ApiService {
         return this.post(`${this.route}/search`, searchRequest);
     }
 
-    get(id: any): Promise<any[]> {
+    get<T>(id: any): Promise<ApiResponse<T>> {
         return this.get(`${this.route}/${id}`);
     }
 
-    update(id: number, payload: any): Promise<any[]> {
+    update<T>(id: number, payload: any): Promise<ApiResponse<T>> {
         return this.put(`${this.route}/${id}`, payload);
     }
 
-    create(payload: any): Promise<any[]> {
+    create<T>(payload: any): Promise<ApiResponse<T>> {
         return this.post(`${this.route}`, payload);
     }
 
-    remove(id: number): Promise<any[]> {
+    remove<T>(id: number): Promise<ApiResponse<T>> {
         return this.delete(`${this.route}/${id}`);
     }
 }
