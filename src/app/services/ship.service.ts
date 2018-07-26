@@ -1,8 +1,8 @@
 import { BaseService } from './base.service';
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { ShipDto, ShipCmd } from '@app/model/ship.model';
+import { ShipDetails, ShipCommand } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
-import { SearchResult } from '@app/model/common.model';
+import { SearchResult } from '@app/model/search.model';
 
 @Injectable()
 export class ShipService extends BaseService {
@@ -18,13 +18,13 @@ export class ShipService extends BaseService {
 
     /************************* Sidebar navigation and ship selection *************************/
 
-    sideNavigationShips: ShipDto[];
+    sideNavigationShips: ShipDetails[];
 
     get shipsCount() {
         return this.sideNavigationShips !== undefined ? this.sideNavigationShips.length : 0;
     }
 
-    private _selectedShip: ShipDto;
+    private _selectedShip: ShipDetails;
 
     setSelected(shipId: number) {
         this._selectedShip = this.sideNavigationShips.filter(s => s.id == shipId)[0];
@@ -52,25 +52,25 @@ export class ShipService extends BaseService {
 
     /************************* Ship form *************************/
 
-    currentShip: ShipDto;
+    currentShip: ShipDetails;
 
     async loadShip(shipId: number) {
-        this.currentShip = (await this.get<ShipDto>(shipId)).data;
+        this.currentShip = (await this.get<ShipDetails>(shipId)).data;
     }
 
-    async createShip(ship: ShipDto) {
+    async createShip(ship: ShipDetails) {
 
-        await this.create<ShipDto>(ship);
+        await this.create<ShipDetails>(ship);
         this.loadSideNavigationShips();
     }
 
-    async updateShip(id: number, ship: ShipDto) {
+    async updateShip(id: number, ship: ShipDetails) {
 
-        await this.update<ShipDto>(id, ship);
+        await this.update<ShipDetails>(id, ship);
         this.loadShip(id);
     }
 
-    async changeShipStatus(id: number, cmd: ShipCmd) {
+    async changeShipStatus(id: number, cmd: ShipCommand) {
 
         await this.put("ships/status", cmd);
         this.loadShip(id);

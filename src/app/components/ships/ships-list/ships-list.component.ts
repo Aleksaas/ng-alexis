@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ShipService } from '@app/services/ship.service';
 import { Observable } from 'rxjs';
-import { ShipDto } from '@app/model/ship.model';
+import { ShipDetails } from '@app/model/ship.model';
 
 @Component({
     selector: 'ships-list',

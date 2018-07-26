@@ -1,15 +1,10 @@
-export class Order {
-    orderBy: string;
-    sortDirection: string;
-}
-
-export class PageableSearchRequest {
+export class SearchRequest {
 
     locale: string;
     pageNumber: number;
     pageSize: number;
     query: any;
-    orders: Order[];
+    orders: SearchOrder[];
 
     constructor() {
 
@@ -18,10 +13,29 @@ export class PageableSearchRequest {
 
         this.query = {};
 
-        const order = new Order();
+        const order = new SearchOrder();
 
         this.orders = [];
         this.orders.push(order);
 
     }
+}
+
+export class SearchResult {
+
+    pageSize?: number
+    entriesCount?: number
+    totalPages?: number
+    currentPage?: number
+    result: any
+}
+
+export class SearchOrder {
+    orderBy?: string | undefined;
+    orderDirection?: string | undefined;
+}
+
+export class BaseQuery {
+    id?: number | undefined;
+    locale?: string | undefined;
 }

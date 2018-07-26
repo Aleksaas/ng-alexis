@@ -4,11 +4,5 @@ export class ApiResponse<T> {
     isSuccess: boolean;
 }
 
-export class SearchResult {
-
-    pageSize?: number
-    entriesCount?: number
-    totalPages?: number
-    currentPage?: number
-    result: any
+export class BaseCommand {
 }
