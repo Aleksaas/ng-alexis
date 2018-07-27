@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { Injector, Injectable } from '@angular/core';
 import { EventService } from '@app/services/event.service';
 import { ApiResponse } from '@app/model/common.model';
-import { SearchRequest } from '@app/model/search.model';
+import { SearchRequest, SearchResult } from '@app/model/search.model';
 
 /**
- * This is base service for all API calls. No API call should be done outside this service.
+ * This was done for experimenting purposes. Not used currently.
  */
 @Injectable()
 export class BaseService extends ApiService {
@@ -20,15 +20,6 @@ export class BaseService extends ApiService {
         super(injector);
 
         this.eventService = injector.get(EventService);
-    }
-
-    search<T>(searchRequest?: SearchRequest): Promise<ApiResponse<T>> {
-
-        if (!searchRequest) {
-            searchRequest = new SearchRequest();
-        }
-
-        return this.post(`${this.route}/search`, searchRequest);
     }
 
     get<T>(id: any): Promise<ApiResponse<T>> {

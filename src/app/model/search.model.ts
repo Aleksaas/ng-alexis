@@ -1,9 +1,9 @@
-export class SearchRequest {
+export class SearchRequest<T> {
 
     locale: string;
     pageNumber: number;
     pageSize: number;
-    query: any;
+    query: T;
     orders: SearchOrder[];
 
     constructor() {
@@ -11,7 +11,7 @@ export class SearchRequest {
         this.pageNumber = 1;
         this.pageSize = 10;
 
-        this.query = {};
+        this.query = {} as T;
 
         const order = new SearchOrder();
 
@@ -21,13 +21,13 @@ export class SearchRequest {
     }
 }
 
-export class SearchResult {
+export class SearchResult<T> {
 
     pageSize?: number
     entriesCount?: number
     totalPages?: number
     currentPage?: number
-    result: any
+    result: T[]
 }
 
 export class SearchOrder {

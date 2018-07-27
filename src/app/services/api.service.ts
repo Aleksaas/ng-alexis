@@ -5,6 +5,8 @@ import { ApiResponse } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { EventService } from '@app/services/event.service';
+import { SearchRequest, SearchResult } from '@app/model/search.model';
 
 
 const API_URL = environment.serverUrl;
@@ -25,9 +27,13 @@ export class ApiService {
 
     timeouts = [];
 
+    protected eventService: EventService;
+
     private http: HttpClient;
 
     constructor(protected injector: Injector) {
+
+        this.eventService = injector.get(EventService);
 
         this.http = injector.get(HttpClient);
 
@@ -61,6 +67,15 @@ export class ApiService {
                 }
             }
         }, 100);
+    }
+
+    search<TResult>(path: string, searchRequest?: SearchRequest<any>): Promise<ApiResponse<SearchResult<TResult>>> {
+
+        if (!searchRequest) {
+            searchRequest = new SearchRequest<any>();
+        }
+
+        return this.post(path, searchRequest);
     }
 
     async get<T>(path: string, params?: any): Promise<ApiResponse<T>> {

@@ -1,17 +1,17 @@
 import { BaseService } from './base.service';
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { ShipDetails, ShipCommand } from '@app/model/ship.model';
+import { ShipDetails, ShipCommand, ShipQuery, ShipListItem } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
-import { SearchResult } from '@app/model/search.model';
+import { SearchResult, SearchRequest } from '@app/model/search.model';
+import { ApiService } from '@app/services/api.service';
+import { ApiResponse } from '@app/model/common.model';
 
 @Injectable()
-export class ShipService extends BaseService {
+export class ShipService extends ApiService {
 
     constructor(injector: Injector) {
 
         super(injector);
-
-        this.route = 'ships';
 
         this.subscribe();
     }
@@ -47,7 +47,7 @@ export class ShipService extends BaseService {
     }
 
     async loadSideNavigationShips() {
-        this.sideNavigationShips = (await this.search<SearchResult>()).data.result;
+        this.sideNavigationShips = (await this.searchShips()).data.result;
     }
 
     /************************* Ship form *************************/
@@ -55,24 +55,28 @@ export class ShipService extends BaseService {
     currentShip: ShipDetails;
 
     async loadShip(shipId: number) {
-        this.currentShip = (await this.get<ShipDetails>(shipId)).data;
+        this.currentShip = (await this.get<ShipDetails>(`ships/${shipId}`)).data;
     }
 
-    async createShip(ship: ShipDetails) {
+    async searchShips(request?: SearchRequest<ShipQuery>) {
+        return await this.search<ShipListItem>('ships/search', request);
+    }
 
-        await this.create<ShipDetails>(ship);
+    async createShip(cmd: ShipCommand) {
+
+        await this.post<ShipDetails>(`ships`, cmd);
         this.loadSideNavigationShips();
     }
 
-    async updateShip(id: number, ship: ShipDetails) {
+    async updateShip(id: number, cmd: ShipCommand) {
 
-        await this.update<ShipDetails>(id, ship);
+        await this.put<ShipDetails>(`ships/${id}`, cmd);
         this.loadShip(id);
     }
 
     async changeShipStatus(id: number, cmd: ShipCommand) {
 
-        await this.put("ships/status", cmd);
+        await this.put<ShipDetails>("ships/status", cmd);
         this.loadShip(id);
     }
 
