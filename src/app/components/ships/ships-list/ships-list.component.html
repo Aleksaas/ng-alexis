@@ -11,3 +11,9 @@
 <div *ngIf="shipService.selectedShip">
     Neka treca komponenta: Selected ship: {{shipService.selectedShip.name}}
 </div>
+
+<div>
+    Ships: {{ships}}
+</div>
+
+<button (click)="reload()">Reload</button>
