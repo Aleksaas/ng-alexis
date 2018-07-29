@@ -38,6 +38,12 @@ export class ShipsListComponent implements OnInit {
         this.shipsSub$.subscribe(response => {
             this.ships = response.data.result[0].id;
         });
+
+        const observable = Observable.create(function (source) {
+            setInterval(() => source.next(Math.random()), 2000);
+        });
+
+        observable.subscribe(response => console.log(response))
     }
 
     async reload() {
