@@ -1,6 +1,7 @@
 import { BaseCommand } from "@app/model/common.model";
 import { BaseQuery } from "@app/model/search.model";
 import { CustomerBasic, CompanyBasic } from "@app/model/customer.model";
+import { Type } from "class-transformer";
 
 export class ShipBasic {
     id: number;
@@ -10,13 +11,10 @@ export class ShipBasic {
 }
 
 export class ShipDetails extends ShipBasic {
+    @Type(() => CustomerBasic)
     customer?: CustomerBasic | undefined;
-    company?: CompanyBasic | undefined;
-    criticalEquipmentsNum: number;
-}
 
-export class ShipListItem extends ShipBasic {
-    customer?: CustomerBasic | undefined;
+    @Type(() => CompanyBasic)
     company?: CompanyBasic | undefined;
     criticalEquipmentsNum: number;
 }

@@ -1,6 +1,6 @@
 import { BaseService } from './base.service';
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { ShipDetails, ShipCommand, ShipQuery, ShipListItem } from '@app/model/ship.model';
+import { ShipDetails, ShipCommand, ShipQuery } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
 import { SearchResult, SearchRequest } from '@app/model/search.model';
 import { ApiService } from '@app/services/api.service';
@@ -59,7 +59,7 @@ export class ShipService extends ApiService {
     }
 
     async searchShips(request?: SearchRequest<ShipQuery>) {
-        return await this.search<ShipListItem>('ships/search', request);
+        return await this.search<ShipDetails>('ships/search', request);
     }
 
     async createShip(cmd: ShipCommand) {
