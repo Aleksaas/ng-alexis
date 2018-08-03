@@ -1,5 +1,5 @@
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { ShipDetails, ShipCommand, ShipQuery, ShipListItem } from '@app/model/ship.model';
+import { ShipDetails, ShipCommand, ShipQuery } from '@app/model/ship.model';
 import { ApiService } from '@app/services/api.service';
 import { SearchRequest } from '@app/model/search.model';
 
