@@ -2,9 +2,9 @@ import { SearchRequest } from './../../../model/search.model';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ShipService } from '@app/services/ship.service';
 import { Observable, Subject } from 'rxjs';
 import { ApiResponse } from '@app/model/common.model';
+import { ShipService } from '@app/components/ships/ship.service';
 
 @Component({
     selector: 'ships-list',

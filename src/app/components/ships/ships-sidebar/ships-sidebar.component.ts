@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { ShipService } from '@app/services/ship.service';
+import { ShipService } from '@app/components/ships/ship.service';
 
 @Component({
     selector: 'ships-sidebar',

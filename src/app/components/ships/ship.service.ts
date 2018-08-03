@@ -1,15 +1,14 @@
-import { BaseService } from './base.service';
+import { ShipApiService } from './../../services/api/ships.api.service';
 import { Injectable, OnInit, Injector } from '@angular/core';
 import { ShipDetails, ShipCommand, ShipQuery, ShipListItem } from '@app/model/ship.model';
 import { Events } from '@app/enums/events.enum';
 import { SearchResult, SearchRequest } from '@app/model/search.model';
 import { ApiService } from '@app/services/api.service';
-import { ApiResponse } from '@app/model/common.model';
 
 @Injectable()
 export class ShipService extends ApiService {
 
-    constructor(injector: Injector) {
+    constructor(injector: Injector, private shipsApi: ShipApiService) {
 
         super(injector);
 
@@ -47,7 +46,7 @@ export class ShipService extends ApiService {
     }
 
     async loadSideNavigationShips() {
-        this.sideNavigationShips = (await this.searchShips()).data.result;
+        this.sideNavigationShips = (await this.shipsApi.searchShips()).data.result;
     }
 
     /************************* Ship form *************************/
@@ -55,28 +54,24 @@ export class ShipService extends ApiService {
     currentShip: ShipDetails;
 
     async loadShip(shipId: number) {
-        this.currentShip = (await this.get<ShipDetails>(`ships/${shipId}`)).data;
-    }
-
-    async searchShips(request?: SearchRequest<ShipQuery>) {
-        return await this.search<ShipListItem>('ships/search', request);
+        this.currentShip = await this.shipsApi.loadShip(shipId);
     }
 
     async createShip(cmd: ShipCommand) {
 
-        await this.post<ShipDetails>(`ships`, cmd);
+        await this.shipsApi.createShip(cmd);
         this.loadSideNavigationShips();
     }
 
     async updateShip(id: number, cmd: ShipCommand) {
 
-        await this.put<ShipDetails>(`ships/${id}`, cmd);
+        await this.shipsApi.updateShip(id, cmd);
         this.loadShip(id);
     }
 
     async changeShipStatus(id: number, cmd: ShipCommand) {
 
-        await this.put<ShipDetails>("ships/status", cmd);
+        await this.shipsApi.changeShipStatus(id, cmd);
         this.loadShip(id);
     }
 

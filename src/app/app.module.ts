@@ -1,5 +1,4 @@
 import { EventService } from '@app/services/event.service';
-import { ShipService } from '@app/services/ship.service';
 import { BaseService } from './services/base.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@app/components/shared/shared.module';
+import { ShipApiService } from '@app/services/api/ships.api.service';
+import { ShipService } from '@app/components/ships/ship.service';
 
 const routes: Routes = [
 
@@ -29,7 +30,8 @@ const routes: Routes = [
         ApiService,
         BaseService,
         ShipService,
-        EventService
+        EventService,
+        ShipApiService
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent]
