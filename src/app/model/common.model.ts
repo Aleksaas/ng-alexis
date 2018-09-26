@@ -1,5 +1,5 @@
-export class ApiResponse<T> {
-    data: T;
+export class ApiResponse {
+    data: any;
     errors: any;
     isSuccess: boolean;
 }

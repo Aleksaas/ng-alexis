@@ -22,19 +22,19 @@ export class BaseService extends ApiService {
         this.eventService = injector.get(EventService);
     }
 
-    get<T>(id: any): Promise<ApiResponse<T>> {
+    get<T>(id: any): Promise<ApiResponse> {
         return this.get(`${this.route}/${id}`);
     }
 
-    update<T>(id: number, payload: any): Promise<ApiResponse<T>> {
+    update<T>(id: number, payload: any): Promise<ApiResponse> {
         return this.put(`${this.route}/${id}`, payload);
     }
 
-    create<T>(payload: any): Promise<ApiResponse<T>> {
+    create<T>(payload: any): Promise<ApiResponse> {
         return this.post(`${this.route}`, payload);
     }
 
-    remove<T>(id: number): Promise<ApiResponse<T>> {
+    remove<T>(id: number): Promise<ApiResponse> {
         return this.delete(`${this.route}/${id}`);
     }
 }

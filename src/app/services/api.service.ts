@@ -69,7 +69,7 @@ export class ApiService {
         }, 100);
     }
 
-    search<TResult>(path: string, searchRequest?: SearchRequest<any>): Promise<ApiResponse<SearchResult<TResult>>> {
+    search(path: string, searchRequest?: SearchRequest<any>): Promise<ApiResponse> {
 
         if (!searchRequest) {
             searchRequest = new SearchRequest<any>();
@@ -78,46 +78,46 @@ export class ApiService {
         return this.post(path, searchRequest);
     }
 
-    async get<T>(path: string, params?: any): Promise<ApiResponse<T>> {
+    async get(path: string, params?: any): Promise<ApiResponse> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .get<ApiResponse<T>>(`${API_URL}/${path}`, this.options)
+            .get<ApiResponse>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async post<T>(path: string, data: any, params?: any): Promise<ApiResponse<T>> {
+    async post(path: string, data: any, params?: any): Promise<ApiResponse> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .post<ApiResponse<T>>(`${API_URL}/${path}`, data, this.options)
+            .post<ApiResponse>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async put<T>(path: string, data: any, params?: any): Promise<ApiResponse<T>> {
+    async put(path: string, data: any, params?: any): Promise<ApiResponse> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .put<ApiResponse<T>>(`${API_URL}/${path}`, data, this.options)
+            .put<ApiResponse>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    async delete<T>(path: string, params?: any): Promise<ApiResponse<T>> {
+    async delete<T>(path: string, params?: any): Promise<ApiResponse> {
 
         this.requestNum++;
         this.options['params'] = params;
 
         return this.http
-            .delete<ApiResponse<T>>(`${API_URL}/${path}`, this.options)
+            .delete<ApiResponse>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
         ).toPromise();
     }

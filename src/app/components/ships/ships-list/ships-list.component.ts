@@ -29,7 +29,7 @@ export class ShipsListComponent implements OnInit {
         this.shipService.loadSideNavigationShips();
 
         this.ships$ = this.http
-            .post<ApiResponse<any>>(`http://localhost:47858/api/ships/search`, new SearchRequest())
+            .post<ApiResponse>(`http://localhost:47858/api/ships/search`, new SearchRequest())
 
         // this.ships$.subscribe(response => {
         //     this.ships = response;
@@ -48,7 +48,7 @@ export class ShipsListComponent implements OnInit {
 
     async reload() {
         const response = await this.http
-            .post<ApiResponse<any>>(`http://localhost:47858/api/ships/search`, new SearchRequest()).toPromise()
+            .post<ApiResponse>(`http://localhost:47858/api/ships/search`, new SearchRequest()).toPromise()
 
         this.shipsSub$.next(response)
     }

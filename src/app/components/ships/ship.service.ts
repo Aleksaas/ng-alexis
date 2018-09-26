@@ -46,7 +46,7 @@ export class ShipService extends ApiService {
     }
 
     async loadSideNavigationShips() {
-        this.sideNavigationShips = (await this.shipsApi.searchShips()).data.result;
+        this.sideNavigationShips = (await this.shipsApi.searchShips()).result;
     }
 
     /************************* Ship form *************************/
