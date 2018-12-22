@@ -1,8 +1,8 @@
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { ShipDetails, ShipCommand, ShipQuery } from '@app/model/ship.model';
 import { ApiService } from '@app/services/api.service';
-import { SearchRequest, SearchResult } from '@app/model/search.model';
 import { plainToClass } from 'class-transformer';
+import { SearchRequest, SearchResponse } from '@app/model/common.model';
+import { ShipQuery, ShipCommand, ShipDetails } from '@app/model/api.model';
 
 @Injectable()
 export class ShipApiService {
@@ -15,10 +15,10 @@ export class ShipApiService {
 
         const response = await this.apiService.get(`ships/${shipId}`);
 
-        return plainToClass(ShipDetails, response.data)[0];
+        return response.data;
     }
 
-    async searchShips(request?: SearchRequest<ShipQuery>): Promise<SearchResult<ShipDetails>> {
+    async searchShips(request?: SearchRequest<ShipQuery>): Promise<SearchResponse<ShipDetails>> {
 
         const response = await this.apiService.search('ships/search', request);
 
