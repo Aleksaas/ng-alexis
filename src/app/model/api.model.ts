@@ -7,7 +7,6 @@
 // ReSharper disable InconsistentNaming
 
 
-
 export class CustomerBasic {
     id: number;
     name: string;
@@ -56,13 +55,11 @@ export class ShipCommand extends BaseCommand {
     customerId: number;
 }
 
-
 export class ShipListItem extends ShipBasic {
     customer: CustomerBasic;
     company: CompanyBasic;
     criticalEquipmentsNum: number;
 }
-
 
 export class BaseQuery {
     id: number;
@@ -75,7 +72,6 @@ export class ShipQuery extends BaseQuery {
     mmsi: number;
     monthReportDate: Date;
 }
-
 
 export class ShipMonthReport extends ShipBasic {
     newEquipmentNum: number;
