@@ -1,14 +1,14 @@
 export class CustomerBasic {
     id: number;
-    name?: string | undefined;
+    name: string;
 }
 
 export class CustomerDetails extends CustomerBasic {
-    company?: CompanyBasic | undefined;
+    company: CompanyBasic;
     shipNumber: number;
 }
 
 export class CompanyBasic {
     id: number;
-    name?: string | undefined;
+    name: string;
 }

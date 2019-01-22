@@ -23,19 +23,19 @@ export class SearchRequest<T> {
 
 export class SearchResult<T> {
 
-    pageSize?: number
+    pageSize: number
     entriesCount?: number
-    totalPages?: number
-    currentPage?: number
+    totalPages: number
+    currentPage: number
     result: T[]
 }
 
 export class SearchOrder {
-    orderBy?: string | undefined;
-    orderDirection?: string | undefined;
+    orderBy: string | undefined;
+    orderDirection: string | undefined;
 }
 
 export class BaseQuery {
-    id?: number | undefined;
-    locale?: string | undefined;
+    id: number | undefined;
+    locale: string | undefined;
 }

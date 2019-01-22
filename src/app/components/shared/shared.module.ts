@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormatDatePipe } from '@app/pipes/formatdate.pipe';
+import { FormatMoneyPipe } from '@app/pipes/formatmoney.pipe';
 
 
 @NgModule({
@@ -18,9 +20,12 @@ import { CommonModule } from '@angular/common';
         HttpClientModule,
         FormsModule,
         CommonModule,
+        FormatDatePipe,
+        FormatMoneyPipe
     ],
     declarations: [
-
+        FormatDatePipe,
+        FormatMoneyPipe
     ],
     providers: [],
 })
