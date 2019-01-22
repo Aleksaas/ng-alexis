@@ -1,12 +1,10 @@
 import { Injectable, Injector } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from '@env/environment';
-import { ApiResponse } from '@app/model/common.model';
+import { ApiResponse, SearchRequest } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { EventService } from '@app/services/event.service';
-import { SearchRequest, SearchResult } from '@app/model/search.model';
+import { Observable, throwError } from 'rxjs';
 
 
 const API_URL = environment.serverUrl;
