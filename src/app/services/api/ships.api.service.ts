@@ -1,6 +1,5 @@
 import { Injectable, OnInit, Injector } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
-import { plainToClass } from 'class-transformer';
 import { SearchRequest, SearchResponse } from '@app/model/common.model';
 import { ShipQuery, ShipCommand, ShipDetails } from '@app/model/api.model';
 

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormatDatePipe } from '@app/pipes/formatdate.pipe';
 import { FormatMoneyPipe } from '@app/pipes/formatmoney.pipe';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FormatMoneyPipe } from '@app/pipes/formatmoney.pipe';
         HttpClientModule,
         FormsModule,
         CommonModule,
+        AngularFontAwesomeModule
     ],
     exports: [
         BrowserModule,

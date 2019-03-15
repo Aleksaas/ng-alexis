@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, animate, style, state } from '@angular/animations';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { trigger, transition, animate, style } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShipService } from '@app/components/ships/ship.service';
 
 @Component({

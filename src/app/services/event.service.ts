@@ -18,7 +18,7 @@ export class EventService {
         );
     }
 
-    subscribe(eventType: Events, callback) {
+    subscribe(eventType: Events, callback: any) {
         this.eventSource$.subscribe(
             event => {
                 if (event.eventType === eventType) {
