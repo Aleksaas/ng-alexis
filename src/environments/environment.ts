@@ -4,5 +4,5 @@
 
 export const environment = {
     production: false,
-    serverUrl: 'http://localhost:47858/api',
+    serverUrl: 'http://api.tvmaze.com',
 };

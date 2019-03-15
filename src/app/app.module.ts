@@ -10,6 +10,9 @@ import { SharedModule } from '@app/components/shared/shared.module';
 import { ShipApiService } from '@app/services/api/ships.api.service';
 import { ShipService } from '@app/components/ships/ship.service';
 import { CoreModule } from './components/core/core.module';
+import { TvShowsModule } from './components/tv-shows/tv-shows.module';
+import { OrderModule } from 'ngx-order-pipe';
+import { TvShowsApiService } from './services/api/shows.api.service';
 
 
 const routes: Routes = [
@@ -26,13 +29,16 @@ const routes: Routes = [
         CoreModule,
         HomeModule,
         ShipModule,
+        TvShowsModule,
+        OrderModule
     ],
     providers: [
         ApiService,
         BaseService,
         ShipService,
         EventService,
-        ShipApiService
+        ShipApiService,
+        TvShowsApiService
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent]

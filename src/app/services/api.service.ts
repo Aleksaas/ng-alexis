@@ -32,13 +32,7 @@ export class ApiService {
 
         this.http = injector.get(HttpClient);
 
-        const headers = new HttpHeaders({
-            'X-Requested-With': 'XMLHttpRequest',
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache',
-            'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT',
-            'Accept-Language': 'en'
-        });
+        const headers = new HttpHeaders({});
 
         this.options = {
             headers: headers

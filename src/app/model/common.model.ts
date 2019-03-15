@@ -1,3 +1,5 @@
+import { SortOrder } from "@app/enums/enum";
+
 export class ApiResponse {
     data: any;
     errors: any;
@@ -44,4 +46,17 @@ export class SearchResponse<T> {
 export class SearchOrder {
     orderBy: string;
     orderDirection: string;
+}
+
+export class SortData {
+    sortColumn = "";
+    sortOrder: SortOrder = SortOrder.ASC;
+
+    isReversed() {
+        return this.sortOrder == SortOrder.DESC;
+    }
+
+    toggleSort() {
+        this.sortOrder = this.sortOrder == SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
+    }
 }
