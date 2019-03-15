@@ -6,3 +6,8 @@ export enum Events {
     CUSTOMER_CHANGED,
     CUSTOMER_CREATED,
 }
+
+export enum SortOrder {
+    ASC,
+    DESC
+}
