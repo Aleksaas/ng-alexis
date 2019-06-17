@@ -13,6 +13,9 @@ import { CoreModule } from './components/core/core.module';
 import { TvShowsModule } from './components/tv-shows/tv-shows.module';
 import { OrderModule } from 'ngx-order-pipe';
 import { TvShowsApiService } from './services/api/shows.api.service';
+import { CustomersModule } from './components/customers/customers.module';
+import { CustomersApiService } from './services/api/customers.api.service';
+import { CustomersService } from '@app/components/customers/customers.service';
 
 
 const routes: Routes = [
@@ -25,12 +28,13 @@ const routes: Routes = [
     ],
     imports: [
         SharedModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, { enableTracing: true }),
         CoreModule,
         HomeModule,
         ShipModule,
         TvShowsModule,
-        OrderModule
+        OrderModule,
+        CustomersModule
     ],
     providers: [
         ApiService,
@@ -38,7 +42,9 @@ const routes: Routes = [
         ShipService,
         EventService,
         ShipApiService,
-        TvShowsApiService
+        TvShowsApiService,
+        CustomersApiService,
+        CustomersService
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent]

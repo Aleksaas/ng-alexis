@@ -3,3 +3,8 @@
         {{ 'Rating should be between 0 and 10' }}
     </div>
 </div>
+<div *ngIf="fieldName && fieldName.invalid && (fieldName.dirty || fieldName.touched)" class="validation-error">
+    <div *ngIf="fieldName.errors.required">
+        {{ 'Field is required' }}
+    </div>
+</div>

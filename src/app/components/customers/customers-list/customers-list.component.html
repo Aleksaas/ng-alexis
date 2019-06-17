@@ -1,0 +1,5 @@
+<ngx-datatable class="material" [rows]="customersSearchResponse.result" [columns]="[{name:'Name'}]"
+    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true"
+    (sort)="onSort($event)"
+    [count]="customersSearchResponse.entriesCount" [offset]="customersSearchResponse.pageNumber" [limit]="customersSearchResponse.pageSize" (page)='setPage($event)'>
+</ngx-datatable>

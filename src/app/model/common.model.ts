@@ -37,9 +37,8 @@ export class SearchRequest<T> {
 export class SearchResponse<T> {
 
     pageSize: number
+    pageNumber: number
     entriesCount: number
-    totalPages: number
-    currentPage: number
     result: T[]
 }
 

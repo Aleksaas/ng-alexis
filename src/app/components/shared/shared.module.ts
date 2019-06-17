@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BaseComponent } from '@app/components/shared/base/base.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormatDatePipe } from '@app/pipes/formatdate.pipe';
-import { FormatMoneyPipe } from '@app/pipes/formatmoney.pipe';
+import { FormatDatePipe } from '@app/pipes/shared/formatdate.pipe';
+import { FormatMoneyPipe } from '@app/pipes/shared/formatmoney.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { BaseTable } from './base-table/base-table.component';
 import { ValidationComponent } from './validation/validation.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -17,7 +16,8 @@ import { ValidationComponent } from './validation/validation.component';
         HttpClientModule,
         FormsModule,
         CommonModule,
-        AngularFontAwesomeModule
+        AngularFontAwesomeModule,
+        NgxDatatableModule
     ],
     exports: [
         BrowserModule,
@@ -26,7 +26,9 @@ import { ValidationComponent } from './validation/validation.component';
         CommonModule,
         FormatDatePipe,
         FormatMoneyPipe,
-        ValidationComponent
+        ValidationComponent,
+        AngularFontAwesomeModule,
+        NgxDatatableModule
     ],
     declarations: [
         FormatDatePipe,
