@@ -11,3 +11,8 @@ export enum SortOrder {
     ASC,
     DESC
 }
+
+export enum Severity {
+    ERROR = 1,
+    WARNING = 2
+}

@@ -1,0 +1,4 @@
+<div *ngFor="let error of errorMessages">
+    <alert *ngIf="error.isWarning" type="warning"><div class="preserve-text-spaces">{{error.message}}</div></alert>
+    <alert *ngIf="!error.isWarning" type="danger"><div class="preserve-text-spaces">{{error.message}}</div></alert>
+</div>

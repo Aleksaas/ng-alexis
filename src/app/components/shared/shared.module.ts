@@ -8,6 +8,8 @@ import { FormatMoneyPipe } from '@app/pipes/shared/formatmoney.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ValidationComponent } from './validation/validation.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ErrorMessagesComponent } from './error-messages/error-messages.component';
+import { ErrorService } from './error-messages/error.service';
 
 
 @NgModule({
@@ -28,13 +30,15 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         FormatMoneyPipe,
         ValidationComponent,
         AngularFontAwesomeModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        ErrorMessagesComponent
     ],
     declarations: [
         FormatDatePipe,
         FormatMoneyPipe,
-        ValidationComponent
+        ValidationComponent,
+        ErrorMessagesComponent
     ],
-    providers: [],
+    providers: [ErrorService],
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { SortOrder } from "@app/enums/enum";
+import { SortOrder, Severity } from "@app/enums/enum";
 
 export class ApiResponse {
     data: any;
@@ -9,6 +9,13 @@ export class ApiResponse {
 export class ApiError {
     code: number;
     message: string;
+    severity: Severity;
+    isWarning: boolean;
+}
+
+export class SearchOrder {
+    orderBy: string;
+    orderDirection: string;
 }
 
 export class SearchRequest<T> {
@@ -30,21 +37,14 @@ export class SearchRequest<T> {
 
         this.orders = [];
         this.orders.push(order);
-
     }
 }
 
 export class SearchResponse<T> {
-
     pageSize: number
     pageNumber: number
     entriesCount: number
     result: T[]
-}
-
-export class SearchOrder {
-    orderBy: string;
-    orderDirection: string;
 }
 
 export class SortData {

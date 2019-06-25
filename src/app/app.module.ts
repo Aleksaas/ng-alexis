@@ -1,6 +1,6 @@
-import { HomeModule } from './components/home/home.module';
+import { HomeModule } from '@app/components/home/home.module';
 import { EventService } from '@app/services/event.service';
-import { BaseService } from './services/base.service';
+import { BaseService } from '@app/services/base.service';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ApiService } from '@app/services/api.service';
@@ -9,13 +9,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '@app/components/shared/shared.module';
 import { ShipApiService } from '@app/services/api/ships.api.service';
 import { ShipService } from '@app/components/ships/ship.service';
-import { CoreModule } from './components/core/core.module';
-import { TvShowsModule } from './components/tv-shows/tv-shows.module';
+import { CoreModule } from '@app/components/core/core.module';
+import { TvShowsModule } from '@app/components/tv-shows/tv-shows.module';
 import { OrderModule } from 'ngx-order-pipe';
-import { TvShowsApiService } from './services/api/shows.api.service';
-import { CustomersModule } from './components/customers/customers.module';
-import { CustomersApiService } from './services/api/customers.api.service';
+import { TvShowsApiService } from '@app/services/api/shows.api.service';
+import { CustomersModule } from '@app/components/customers/customers.module';
+import { CustomersApiService } from '@app/services/api/customers.api.service';
 import { CustomersService } from '@app/components/customers/customers.service';
+import { JwtService } from '@app/services/auth/jwt.service';
+import { AuthService } from '@app/services/auth/auth.service';
 
 
 const routes: Routes = [
@@ -44,7 +46,9 @@ const routes: Routes = [
         ShipApiService,
         TvShowsApiService,
         CustomersApiService,
-        CustomersService
+        CustomersService,
+        JwtService,
+        AuthService
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent]

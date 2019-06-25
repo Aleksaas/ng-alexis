@@ -1,7 +1,6 @@
-import { CustomerQuery } from '@app/model/api.model';
-import { CustomerDetails } from './../../../model/api.model';
+import { CustomersService } from '@app/components/customers/customers.service';
+import { CustomerQuery, CustomerDetails } from '@app/model/api.model';
 import { Component, OnInit } from '@angular/core';
-import { CustomersService } from '../customers.service';
 import { SearchResponse, SearchRequest } from '@app/model/common.model';
 
 @Component({
