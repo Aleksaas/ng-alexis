@@ -8,8 +8,10 @@ import { FormatMoneyPipe } from '@app/pipes/shared/formatmoney.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ValidationComponent } from './validation/validation.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ErrorMessagesComponent } from './error-messages/error-messages.component';
-import { ErrorService } from './error-messages/error.service';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorService } from '@app/services/error.service';
 
 
 @NgModule({
@@ -19,7 +21,15 @@ import { ErrorService } from './error-messages/error.service';
         FormsModule,
         CommonModule,
         AngularFontAwesomeModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            disableTimeOut: true,
+            closeButton: true,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+        }),
+        AlertModule.forRoot(),
     ],
     exports: [
         BrowserModule,
@@ -30,14 +40,12 @@ import { ErrorService } from './error-messages/error.service';
         FormatMoneyPipe,
         ValidationComponent,
         AngularFontAwesomeModule,
-        NgxDatatableModule,
-        ErrorMessagesComponent
+        NgxDatatableModule
     ],
     declarations: [
         FormatDatePipe,
         FormatMoneyPipe,
-        ValidationComponent,
-        ErrorMessagesComponent
+        ValidationComponent
     ],
     providers: [ErrorService],
 })

@@ -5,6 +5,7 @@ import { ShellComponent } from './shell/shell.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { TopNavbarComponent } from './topnavbar/topnavbar.component';
+import { GuestShellComponent } from './guest-shell/guest-shell.component';
 
 
 @NgModule({
@@ -16,13 +17,15 @@ import { TopNavbarComponent } from './topnavbar/topnavbar.component';
         ShellComponent,
         FooterComponent,
         NavigationComponent,
-        TopNavbarComponent
+        TopNavbarComponent,
+        GuestShellComponent
     ],
     declarations: [
         ShellComponent,
         FooterComponent,
         NavigationComponent,
-        TopNavbarComponent
+        TopNavbarComponent,
+        GuestShellComponent
     ],
     providers: [],
 })

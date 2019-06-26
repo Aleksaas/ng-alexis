@@ -18,6 +18,7 @@ import { CustomersApiService } from '@app/services/api/customers.api.service';
 import { CustomersService } from '@app/components/customers/customers.service';
 import { JwtService } from '@app/services/auth/jwt.service';
 import { AuthService } from '@app/services/auth/auth.service';
+import { LoginModule } from '@app/components/login/login.module';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
         ShipModule,
         TvShowsModule,
         OrderModule,
-        CustomersModule
+        CustomersModule,
+        LoginModule
     ],
     providers: [
         ApiService,

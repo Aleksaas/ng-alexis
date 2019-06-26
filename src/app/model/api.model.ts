@@ -96,7 +96,7 @@ export class ShipMonthReport extends ShipBasic {
     updatedEquipmentNum: number;
 }
 
-export class LoginDto {
+export class LoginCommand {
     email: string;
     password: string;
 }

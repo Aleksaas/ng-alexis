@@ -2,7 +2,7 @@ import { SortOrder, Severity } from "@app/enums/enum";
 
 export class ApiResponse {
     data: any;
-    errors: any;
+    errors: ApiError[];
     isSuccess: boolean;
 }
 

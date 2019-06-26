@@ -1,10 +1,14 @@
+import { ErrorService } from '@app/services/error.service';
 import { Injectable, Injector } from '@angular/core';
 import { environment } from '@env/environment';
 import { SearchRequest } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { EventService } from '@app/services/event.service';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { GlobalVariables } from '@app/global';
 
 
 const API_URL = environment.serverUrl;
@@ -23,12 +27,18 @@ export class ApiService {
     timeouts = [];
 
     protected eventService: EventService;
+    protected errorService: ErrorService;
+    protected router: Router;
+    protected toastr: ToastrService;
 
     private http: HttpClient;
 
     constructor(protected injector: Injector) {
 
         this.eventService = injector.get(EventService);
+        this.errorService = injector.get(ErrorService);
+        this.router = injector.get(Router);
+        this.toastr = injector.get(ToastrService);
 
         this.http = injector.get(HttpClient);
 
@@ -85,7 +95,8 @@ export class ApiService {
 
         return this.http
             .post<any>(`${API_URL}/${path}`, data, this.options)
-            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+            .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
+                catchError(err => this.handleError(err))
         ).toPromise();
     }
 
@@ -96,7 +107,8 @@ export class ApiService {
 
         return this.http
             .put<any>(`${API_URL}/${path}`, data, this.options)
-            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+            .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
+                catchError(err => this.handleError(err))
         ).toPromise();
     }
 
@@ -107,28 +119,32 @@ export class ApiService {
 
         return this.http
             .delete<any>(`${API_URL}/${path}`, this.options)
-            .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
+            .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
+                catchError(err => this.handleError(err))
         ).toPromise();
     }
 
-    private handleError(error: any) {
+    private handleError(response: any) {
 
-        console.log('ApiService::handleError: ', error);
+        console.log('ApiService::handleError: ', response);
 
         this.requestNum--;
 
-        switch (error.status) {
+        switch (response.status) {
+            case 400:
+                this.errorService.handleServerErrors(response.error.errors);
+                break;
             case 401:
-                // Show modal
+                this.router.navigate(['/login']);
                 break;
             case 403:
-                // Show modal
+                this.router.navigate(['/login']);
                 break;
             case 500:
-                // Show modal
+                this.toastr.error(GlobalVariables.Translations["SomethingWrongMessage"]);
                 break;
         }
 
-        return throwError(error);
+        return throwError(response);
     }
 }

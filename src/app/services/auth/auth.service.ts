@@ -1,6 +1,6 @@
 import { ApiService } from '@app/services/api.service';
 import { Injectable } from '@angular/core';
-import { LoginDto } from '@app/model/api.model';
+import { LoginCommand } from '@app/model/api.model';
 
 
 @Injectable()
@@ -10,14 +10,11 @@ export class AuthService {
         private apiService: ApiService,
     ) { }
 
-    async login(username: string, password: string): Promise<string> {
+    async login(loginCommand: LoginCommand): Promise<string> {
 
-        const loginDto = new LoginDto();
+        const response = await this.apiService.post(`account/login`, loginCommand);
 
-        loginDto.email = username;
-        loginDto.password = password;
-
-        const response = await this.apiService.post(`account/login`, loginDto);
+        console.log(response);
 
         return response.data;
     }
