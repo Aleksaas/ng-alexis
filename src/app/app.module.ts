@@ -31,7 +31,7 @@ const routes: Routes = [
     ],
     imports: [
         SharedModule,
-        RouterModule.forRoot(routes, { enableTracing: true }),
+        RouterModule.forRoot(routes, { enableTracing: false }),
         CoreModule,
         HomeModule,
         ShipModule,

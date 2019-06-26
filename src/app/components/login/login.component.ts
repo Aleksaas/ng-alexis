@@ -1,6 +1,7 @@
 import { LoginCommand } from '@app/model/api.model';
 import { AuthService } from '@app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
 
     loginCommand: LoginCommand = new LoginCommand();
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private router: Router) {
 
     }
 
@@ -20,5 +22,6 @@ export class LoginComponent implements OnInit {
 
     async login() {
         const response = await this.authService.login(this.loginCommand);
+        this.router.navigate(['/home']);
     }
 }

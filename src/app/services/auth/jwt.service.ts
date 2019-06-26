@@ -6,7 +6,14 @@ import * as jwt_decode from "jwt-decode";
 export class JwtService {
 
     getToken(): any {
-        const tokenDecoded = jwt_decode(window.localStorage['jwtToken']);
+        let tokenDecoded = null;
+
+        const token = window.localStorage['jwtToken'];
+
+        if (token) {
+            tokenDecoded = jwt_decode(token);
+        }
+
         return tokenDecoded;
     }
 
