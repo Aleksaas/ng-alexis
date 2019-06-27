@@ -16,3 +16,7 @@ export enum Severity {
     ERROR = 1,
     WARNING = 2
 }
+
+export const Roles = {
+    ADMIN: 'admin'
+}

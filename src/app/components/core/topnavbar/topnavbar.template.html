@@ -8,10 +8,11 @@
                         id="top-search">
                 </div>
             </form>
+            <span *ngIf="authService.isAdmin">{{authService.currentUser?.Username}}</span>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a href="#">
+                <a (click)="authService.logout()">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

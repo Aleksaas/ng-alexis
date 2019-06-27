@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@app/services/auth/auth.service';
 declare var jQuery: any;
 
 @Component({
@@ -6,6 +7,10 @@ declare var jQuery: any;
     templateUrl: 'topnavbar.template.html'
 })
 export class TopNavbarComponent {
+
+    constructor(private authService: AuthService) {
+
+    }
 
     toggleNavigation(): void {
         jQuery("body").toggleClass("mini-navbar");

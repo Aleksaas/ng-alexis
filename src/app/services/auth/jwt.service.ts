@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from "jwt-decode";
+import { UserToken } from '@app/model/common.model';
 
 
 @Injectable()
 export class JwtService {
 
-    getToken(): any {
+    getToken(): UserToken {
         let tokenDecoded = null;
 
         const token = window.localStorage['jwtToken'];
@@ -15,6 +16,10 @@ export class JwtService {
         }
 
         return tokenDecoded;
+    }
+
+    getRawToken(): string {
+        return window.localStorage['jwtToken'];
     }
 
     saveToken(token: string) {

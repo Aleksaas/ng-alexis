@@ -18,6 +18,12 @@ export class SearchOrder {
     orderDirection: string;
 }
 
+export class UserToken {
+    Id: string;
+    Username: string;
+    Roles: string[];
+}
+
 export class SearchRequest<T> {
 
     locale: string;

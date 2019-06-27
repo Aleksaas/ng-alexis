@@ -1,5 +1,6 @@
+import { JwtService } from './auth/jwt.service';
 import { ErrorService } from '@app/services/error.service';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { environment } from '@env/environment';
 import { SearchRequest } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -30,6 +31,7 @@ export class ApiService {
     protected errorService: ErrorService;
     protected router: Router;
     protected toastr: ToastrService;
+    protected jwtService: JwtService;
 
     private http: HttpClient;
 
@@ -39,10 +41,13 @@ export class ApiService {
         this.errorService = injector.get(ErrorService);
         this.router = injector.get(Router);
         this.toastr = injector.get(ToastrService);
+        this.jwtService = injector.get(JwtService);
 
         this.http = injector.get(HttpClient);
 
-        const headers = new HttpHeaders({});
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + this.jwtService.getRawToken()
+        });
 
         this.options = {
             headers: headers
