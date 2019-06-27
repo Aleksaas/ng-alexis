@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/services/auth/auth.service';
 
 declare var jQuery: any;
 
@@ -10,7 +11,8 @@ declare var jQuery: any;
 
 export class NavigationComponent implements AfterViewInit {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router,
+                private authService: AuthService) { }
 
     ngAfterViewInit() {
         jQuery('#side-menu').metisMenu();
