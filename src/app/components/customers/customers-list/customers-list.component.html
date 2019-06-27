@@ -1,5 +1,8 @@
-<ngx-datatable class="material" [rows]="customersSearchResponse.result" [columns]="[{name:'Name'}]"
+<ngx-datatable class="material" [rows]="customerService.customersSearchResponse.result" [columns]="[{name:'Name'}]"
     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true"
-    (sort)="onSort($event)"
-    [count]="customersSearchResponse.entriesCount" [offset]="customersSearchResponse.pageNumber" [limit]="customersSearchResponse.pageSize" (page)='setPage($event)'>
+    [count]="customerService.customersSearchResponse.entriesCount" 
+    [offset]="customerService.customersSearchResponse.pageNumber" 
+    [limit]="customerService.customersSearchResponse.pageSize" 
+    (sort)="setSort($event)"
+    (page)='setPage($event)'>
 </ngx-datatable>
