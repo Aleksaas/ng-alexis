@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { LoginCommand } from '@app/model/api.model';
 import { UserToken } from '@app/model/common.model';
 import { Router } from '@angular/router';
-import { Roles } from '@app/enums/enum';
+import { Roles } from '@app/model/enum';
 import * as _ from 'lodash';
 
 

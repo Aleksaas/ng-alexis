@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Events } from '@app/enums/enum';
+import { Events } from '@app/model/enum';
 
 @Injectable()
 export class EventService {

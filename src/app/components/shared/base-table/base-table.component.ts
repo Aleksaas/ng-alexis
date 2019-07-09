@@ -1,5 +1,5 @@
 import { SortData } from '@app/model/common.model';
-import { SortOrder } from '@app/enums/enum';
+import { SortOrder } from '@app/model/enum';
 
 export class BaseTable {
 

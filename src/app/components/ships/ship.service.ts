@@ -1,6 +1,6 @@
 
 import { Injectable, OnInit, Injector } from '@angular/core';
-import { Events } from '@app/enums/enum';
+import { Events } from '@app/model/enum';
 import { ApiService } from '@app/services/api.service';
 import { ShipApiService } from '@app/services/api/ships.api.service';
 import { ShipDetails, ShipCommand } from '@app/model/api.model';

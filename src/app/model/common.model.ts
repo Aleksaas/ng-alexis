@@ -1,4 +1,4 @@
-import { SortOrder, Severity } from "@app/enums/enum";
+import { SortOrder, Severity } from "@app/model/enum";
 
 export class ApiResponse {
     data: any;
