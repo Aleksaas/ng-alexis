@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { TvShowsComponent } from './tv-shows-component';
 import { TvShowsListComponent } from './tv-shows-list/tv-shows-list.component';
 import { TvShowsFormComponent } from './tv-shows-form/tv-shows-form.component';
-import { Route } from '@app/services/route.service';
+import { RouteService } from '@app/services/route.service';
 
 const routes: Routes = [
-    Route.withShell([{
+    RouteService.withShell([{
         path: 'tv-shows',
         component: TvShowsComponent,
         children: [

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomersComponent } from './customers.component';
 import { CustomersListComponent } from './customers-list/customers-list.component';
-import { Route } from '@app/services/route.service';
+import { RouteService } from '@app/services/route.service';
 
 const routes: Routes = [
-    Route.withShell([{
+    RouteService.withShell([{
         path: 'customers',
         component: CustomersComponent,
         children: [

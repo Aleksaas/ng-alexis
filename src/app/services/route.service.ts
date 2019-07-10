@@ -5,7 +5,7 @@ import { GuestShellComponent } from '@app/components/core/guest-shell/guest-shel
 /**
  * Provides helper methods to create routes.
  */
-export class Route {
+export class RouteService {
 
     /**
      * Creates routes using the shell component for registered user.
