@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormatDatePipe } from '@app/pipes/format/formatdate.pipe';
 import { FormatMoneyPipe } from '@app/pipes/format/formatmoney.pipe';
@@ -19,6 +19,7 @@ import { ErrorService } from '@app/services/error.service';
         BrowserModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         AngularFontAwesomeModule,
         NgxDatatableModule,
@@ -35,6 +36,7 @@ import { ErrorService } from '@app/services/error.service';
         BrowserModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         FormatDatePipe,
         FormatMoneyPipe,

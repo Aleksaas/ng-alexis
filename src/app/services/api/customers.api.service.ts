@@ -1,8 +1,10 @@
-import { CustomerDetails } from './../../model/api.model';
+import { CustomerDetails } from '@app/model/api.model';
 import { Injectable } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '@app/services/api.service';
 import { SearchRequest, SearchResponse } from '@app/model/common.model';
 import { CustomerQuery } from '@app/model/api.model';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 
 @Injectable({
     providedIn: 'root'
@@ -13,10 +15,8 @@ export class CustomersApiService {
         private apiService: ApiService,
     ) { }
 
-    async searchCustomers(request?: SearchRequest<CustomerQuery>): Promise<SearchResponse<CustomerDetails>> {
+    searchCustomers(request?: SearchRequest<CustomerQuery>): Observable<SearchResponse<CustomerDetails>> {
 
-        const response = await this.apiService.search('customers/search', request);
-
-        return response.data;
+        return this.apiService.search('customers/search', request).pipe(map(response => response.data));
     }
 }

@@ -23,7 +23,7 @@ export class AuthService {
 
         const response = await this.apiService.post(`account/login`, loginCommand);
 
-        this.jwtService.saveToken(response.data);
+        // this.jwtService.saveToken(response.data);
 
         this.loadUser();
     }

@@ -6,7 +6,7 @@ import { SearchRequest } from '@app/model/common.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { EventService } from '@app/services/event.service';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalVariables } from '@app/global';
@@ -73,7 +73,7 @@ export class ApiService {
         }, 100);
     }
 
-    search(path: string, searchRequest?: SearchRequest<any>): Promise<any> {
+    search(path: string, searchRequest?: SearchRequest<any>): Observable<any> {
 
         if (!searchRequest) {
             searchRequest = new SearchRequest<any>();
@@ -82,7 +82,7 @@ export class ApiService {
         return this.post(path, searchRequest);
     }
 
-    async get(path: string, params?: any): Promise<any> {
+    get(path: string, params?: any): Observable<any> {
 
         this.requestNum++;
         this.options['params'] = params;
@@ -90,10 +90,10 @@ export class ApiService {
         return this.http
             .get<any>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.requestNum--; return res; }), catchError(err => this.handleError(err))
-        ).toPromise();
+        );
     }
 
-    async post(path: string, data: any, params?: any): Promise<any> {
+    post(path: string, data: any, params?: any): Observable<any> {
 
         this.requestNum++;
         this.options['params'] = params;
@@ -102,10 +102,10 @@ export class ApiService {
             .post<any>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
                 catchError(err => this.handleError(err))
-        ).toPromise();
+        );
     }
 
-    async put(path: string, data: any, params?: any): Promise<any> {
+    put(path: string, data: any, params?: any): Observable<any> {
 
         this.requestNum++;
         this.options['params'] = params;
@@ -114,10 +114,10 @@ export class ApiService {
             .put<any>(`${API_URL}/${path}`, data, this.options)
             .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
                 catchError(err => this.handleError(err))
-        ).toPromise();
+        );
     }
 
-    async delete<T>(path: string, params?: any): Promise<any> {
+    delete<T>(path: string, params?: any): Observable<any> {
 
         this.requestNum++;
         this.options['params'] = params;
@@ -126,7 +126,7 @@ export class ApiService {
             .delete<any>(`${API_URL}/${path}`, this.options)
             .pipe(map((res) => { this.errorService.clearMessages(); this.requestNum--; return res; }),
                 catchError(err => this.handleError(err))
-        ).toPromise();
+        );
     }
 
     private handleError(response: any) {

@@ -1,7 +1,10 @@
 import { CustomersService } from '@app/components/customers/customers.service';
-import { CustomerQuery, CustomerDetails } from '@app/model/api.model';
 import { Component, OnInit } from '@angular/core';
-import { SearchResponse, SearchRequest } from '@app/model/common.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, tap, switchMap, debounce } from 'rxjs/operators';
+import { Observable, noop } from 'rxjs';
+import { SearchResponse } from '@app/model/common.model';
+import { CustomerDetails } from '@app/model/api.model';
 
 @Component({
     selector: 'customers-list',
@@ -10,9 +13,24 @@ import { SearchResponse, SearchRequest } from '@app/model/common.model';
 })
 export class CustomersListComponent implements OnInit {
 
-    constructor(private customerService: CustomersService) { }
+    searchForm: FormGroup;
+
+    searchResponse$: Observable<SearchResponse<CustomerDetails>> = this.customerService.customersSearchResponse$;
+
+    constructor(private customerService: CustomersService,
+        private formBuilder: FormBuilder) { }
 
     ngOnInit() {
+        this.searchForm = this.formBuilder.group({
+            searchTerm: '',
+        });
+
+        this.searchForm.get('searchTerm').valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            switchMap((searchTerm) => this.customerService.setSearchQuery(searchTerm))
+        ).subscribe(() => noop);
+
         this.setPage({ offset: 0 });
     }
 
@@ -23,5 +41,4 @@ export class CustomersListComponent implements OnInit {
     setSort($event: any) {
         console.log($event);
     }
-
 }

@@ -1,8 +1,18 @@
-<ngx-datatable class="material" [rows]="customerService.customersSearchResponse.result" [columns]="[{name:'Name'}]"
+<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="searchForm" class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-2">Name: </label>
+                <div class="col-md-4">
+                    <input formControlName="searchTerm" class="form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ngx-datatable class="material" [rows]="(searchResponse$ | async)?.result" [columns]="[{name:'Name'}]"
     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true"
-    [count]="customerService.customersSearchResponse.entriesCount" 
-    [offset]="customerService.customersSearchResponse.pageNumber" 
-    [limit]="customerService.customersSearchResponse.pageSize" 
-    (sort)="setSort($event)"
-    (page)='setPage($event)'>
+    [count]="(searchResponse$ | async)?.entriesCount" [offset]="(searchResponse$ | async)?.pageNumber"
+    [limit]="(searchResponse$ | async)?.pageSize" (sort)="setSort($event)" (page)='setPage($event)'>
 </ngx-datatable>

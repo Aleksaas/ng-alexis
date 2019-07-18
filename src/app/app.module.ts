@@ -1,6 +1,5 @@
 import { HomeModule } from '@app/components/home/home.module';
 import { EventService } from '@app/services/event.service';
-import { BaseService } from '@app/services/base.service';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ApiService } from '@app/services/api.service';
@@ -42,7 +41,6 @@ const routes: Routes = [
     ],
     providers: [
         ApiService,
-        BaseService,
         ShipService,
         EventService,
         ShipApiService,
