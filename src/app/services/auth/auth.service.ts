@@ -21,9 +21,9 @@ export class AuthService {
 
     async login(loginCommand: LoginCommand): Promise<any> {
 
-        const response = await this.apiService.post(`account/login`, loginCommand);
+        const response = await this.apiService.post(`account/login`, loginCommand).toPromise();
 
-        // this.jwtService.saveToken(response.data);
+        this.jwtService.saveToken(response.data);
 
         this.loadUser();
     }
